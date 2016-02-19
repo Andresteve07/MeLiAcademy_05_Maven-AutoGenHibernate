@@ -1,0 +1,1 @@
+# MeLiAcademy_05_Maven-AutoGenHibernate

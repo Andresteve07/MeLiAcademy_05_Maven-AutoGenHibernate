@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 19-feb-2016 10:42:58 by Hibernate Tools 4.3.1.Final -->
+<hibernate-mapping>
+    <class name="com.mercadolibre.academy.fidelizacion.modelo.entity.Cliente" table="cliente" catalog="fidelizacion" optimistic-lock="version">
+        <id name="idCliente" type="java.lang.Integer">
+            <column name="ID_CLIENTE" />
+            <generator class="foreign">
+                <param name="property">direccion</param>
+            </generator>
+        </id>
+        <one-to-one name="direccion" class="com.mercadolibre.academy.fidelizacion.modelo.entity.Direccion" constrained="true"></one-to-one>
+        <property name="nombre" type="string">
+            <column name="NOMBRE" length="50" not-null="true" />
+        </property>
+        <property name="apellido" type="string">
+            <column name="APELLIDO" length="50" not-null="true" />
+        </property>
+        <property name="dni" type="string">
+            <column name="DNI" length="50" not-null="true" unique="true" />
+        </property>
+        <property name="telefono" type="string">
+            <column name="TELEFONO" length="50" />
+        </property>
+        <property name="idDireccion" type="int">
+            <column name="ID_DIRECCION" not-null="true" unique="true" />
+        </property>
+        <property name="mail" type="string">
+            <column name="MAIL" length="100" />
+        </property>
+        <property name="fechaNacimiento" type="date">
+            <column name="FECHA_NACIMIENTO" length="10" />
+        </property>
+        <property name="fechaAlta" type="date">
+            <column name="FECHA_ALTA" length="10" not-null="true" />
+        </property>
+        <property name="puntosAcumulados" type="java.lang.Integer">
+            <column name="PUNTOS_ACUMULADOS" />
+        </property>
+        <set name="compras" table="compra" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ID_CLIENTE" not-null="true" />
+            </key>
+            <one-to-many class="com.mercadolibre.academy.fidelizacion.modelo.entity.Compra" />
+        </set>
+        <set name="puntoses" table="puntos" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ID_CLIENTE" not-null="true" />
+            </key>
+            <one-to-many class="com.mercadolibre.academy.fidelizacion.modelo.entity.Puntos" />
+        </set>
+        <set name="canjes" table="canje" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ID_CLIENTE" not-null="true" />
+            </key>
+            <one-to-many class="com.mercadolibre.academy.fidelizacion.modelo.entity.Canje" />
+        </set>
+    </class>
+</hibernate-mapping>

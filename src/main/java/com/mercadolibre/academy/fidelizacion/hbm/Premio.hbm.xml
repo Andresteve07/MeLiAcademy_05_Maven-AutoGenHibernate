@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 19-feb-2016 10:42:58 by Hibernate Tools 4.3.1.Final -->
+<hibernate-mapping>
+    <class name="com.mercadolibre.academy.fidelizacion.modelo.entity.Premio" table="premio" catalog="fidelizacion" optimistic-lock="version">
+        <id name="idPremio" type="java.lang.Integer">
+            <column name="ID_PREMIO" />
+            <generator class="identity" />
+        </id>
+        <property name="detalle" type="string">
+            <column name="DETALLE" length="150" not-null="true" />
+        </property>
+        <property name="puntos" type="int">
+            <column name="PUNTOS" not-null="true" />
+        </property>
+        <property name="stock" type="int">
+            <column name="STOCK" not-null="true" />
+        </property>
+        <property name="activo" type="boolean">
+            <column name="ACTIVO" not-null="true" />
+        </property>
+        <property name="aniversario" type="boolean">
+            <column name="ANIVERSARIO" not-null="true" />
+        </property>
+        <set name="canjes" table="canje" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ID_PREMIO" not-null="true" />
+            </key>
+            <one-to-many class="com.mercadolibre.academy.fidelizacion.modelo.entity.Canje" />
+        </set>
+    </class>
+</hibernate-mapping>
